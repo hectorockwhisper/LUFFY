@@ -1,0 +1,26 @@
+name: fix-readme
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Remove unintended repository-structure line from README
+        run: |
+          sed -i '\|figures/.*# Figures|d' README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff --cached --quiet; then
+            echo "No README changes to commit."
+          else
+            git commit -m "docs: drop unintended repository-structure line in TODO README"
+            git push origin HEAD:refs/heads/dev
+          fi
