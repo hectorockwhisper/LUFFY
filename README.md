@@ -36,7 +36,6 @@ LUFFY/
 ├── data/                  # Training data and scripts
 ├── eval_scripts/          # Evaluation utilities
 ├── exp_scripts/           # Experiment scripts
-├── figures/               # Figures
 └── README.md              # This file
 ```
 
